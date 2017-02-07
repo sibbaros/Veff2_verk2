@@ -8,10 +8,24 @@ import * as io from 'socket.io-client';
 })
 export class AppComponent {
   title = 'app works!';
-  socket : any ;
+  socket : any;
+  username : string;
+  loginFaild: boolean = false;
+
   
   constructor(){
-    this.socket = io("http://localhost:8080")
+    this.socket = io("http://localhost:8080");
+    this.socket.on("connect", function(){
+      console.log("connect")
+    });
+  }
+
+  onLogin(){
+    this.socket.emit("adduser", this.username, succeeded=>{
+      if(!succeeded){
+        this.loginFaild = true;
+      }
+    });
   }
 }
 
