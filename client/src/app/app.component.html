@@ -1,9 +1,7 @@
 <h1>
-    {{title}}
+    <!--{{title}}-->
+    My Chat App!
 </h1>
 
-<input [(ngModel)]="username" />
-<button (click)="onLogin()">Login</button>
-<div *ngIf="loginFaild">
-    Sorry, but that username is already taken
-</div>
+
+<router-outlet></router-outlet>
