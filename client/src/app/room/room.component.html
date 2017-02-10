@@ -1,3 +1,8 @@
-<p>
-  room works!
-</p>
+<ul>
+    <li *ngFor="let message of messages">
+        {{ message }}
+    </li>
+</ul>
+
+<input [(ngModel)]="chatForm" />
+<button (click)="submitForm()"> Send </button>

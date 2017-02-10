@@ -27,6 +27,10 @@ import { ChatService } from './chat.service';
     pathMatch: "full"
   }, 
   {
+    path: "lobby",
+    component: RoomComponent,
+  },
+  {
     path: "login",
     component: LoginComponent
 

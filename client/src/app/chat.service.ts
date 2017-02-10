@@ -42,4 +42,34 @@ export class ChatService {
     return observable;
   }
 
+  joinRoom(room : {}) : Observable<boolean> {
+    let observable = new Observable(observer => {
+      this.socket.emit("joinroom", 3, succeeded =>{
+        this.socket.emit("updatechat");
+        this.socket.emit("updateusers");
+        this.socket.emit("updatetopic");
+      } 
+      
+      );
+      observer.next(room);
+
+    })
+    return observable;
+  } 
+
+  sendMessage(roomID : string) : Observable<string> {
+    let observable = new Observable(observer => {
+
+       /* this.socket.emit("sendmsg", "3", succeeded=>{
+          console.log("message received");
+          this.socket.emit("updatechat");
+        }, (true));*/
+       // this.socket.emit("sendmsg", {roomName: "the room identifier", msg: "The message itself, only the first 200 chars are considered valid" });
+                 console.log("message received");
+
+        observer.next(roomID);
+        });
+    return observable;
+  }
+
 }

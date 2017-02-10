@@ -1,5 +1,10 @@
 <ul>
     <li *ngFor="let room of rooms">
         {{ room }}
+        <button (click)="onJoinRoom(room)"> Join room </button>
     </li>
 </ul>
+
+<input [(ngModel)]="newRoom" />
+
+<button (click)="onAddRoom()"> Add Room </button>

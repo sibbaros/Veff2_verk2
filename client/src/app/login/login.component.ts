@@ -18,13 +18,14 @@ export class LoginComponent implements OnInit {
   onLogin(){
      console.log("login called in component");
 
-    this.chatService.login(this.username).subscribe(succeeded => {
+      this.chatService.login(this.username).subscribe(succeeded => {
       console.log("success!");
       this.loginFailed = !succeeded;
       if(succeeded === true){
         this.router.navigate(["/rooms"]);
+        console.log("hi");
       }
-      if(this.loginFailed){
+      if(succeeded === false){
         console.log("failure");
       }
     });
