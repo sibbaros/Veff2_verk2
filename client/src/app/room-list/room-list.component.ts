@@ -9,8 +9,12 @@ import { ChatService} from '../chat.service';
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
+<<<<<<< HEAD
 
   constructor(private chatService: ChatService, /*private router: Router*/) { }
+=======
+  constructor(private chatService: ChatService) { }
+>>>>>>> fdcd5bed41312216df19d4bae6ee75211abb45e3
 
   rooms: string[];
  // roomObjects: [{}]; 

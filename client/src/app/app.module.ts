@@ -21,6 +21,7 @@ import { ChatService } from './chat.service';
     BrowserModule,
     FormsModule,
     HttpModule,
+
   RouterModule.forRoot([{
     path: "",
     redirectTo: "login",
@@ -40,6 +41,7 @@ import { ChatService } from './chat.service';
     component: RoomListComponent
 
   }])
+
   ],
   providers: [ChatService],
   bootstrap: [AppComponent]
