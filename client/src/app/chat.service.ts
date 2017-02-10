@@ -41,11 +41,14 @@ export class ChatService {
     return observable;
   }
 
-  joinRoom(room : {}) : Observable<boolean> {
+  joinRoom(room) : Observable<boolean> {
+    console.log("hi1");
     let observable = new Observable(observer => {
-      this.socket.emit("joinroom", 3, succeeded =>{
+      console.log("hi2")
+      this.socket.emit("joinroom", room.id, succeeded =>{
+        console.log("joinRoom chat service");
         this.socket.emit("updatechat");
-        this.socket.emit("updateusers");
+       // this.socket.emit("updateusers");
         this.socket.emit("updatetopic");
       } 
       
