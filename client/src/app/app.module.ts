@@ -21,11 +21,16 @@ import { ChatService } from './chat.service';
     BrowserModule,
     FormsModule,
     HttpModule,
+
   RouterModule.forRoot([{
     path: "",
     redirectTo: "login",
     pathMatch: "full"
   }, 
+  {
+    path: "lobby",
+    component: RoomComponent,
+  },
   {
     path: "login",
     component: LoginComponent
@@ -36,6 +41,7 @@ import { ChatService } from './chat.service';
     component: RoomListComponent
 
   }])
+
   ],
   providers: [ChatService],
   bootstrap: [AppComponent]
