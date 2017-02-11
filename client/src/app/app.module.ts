@@ -23,21 +23,21 @@ import { ChatService } from './chat.service';
     HttpModule,
 
   RouterModule.forRoot([{
-    path: "",
-    redirectTo: "login",
-    pathMatch: "full"
-  }, 
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
   {
-    path: "lobby",
+    path: 'lobby',
     component: RoomComponent,
   },
   {
-    path: "login",
+    path: 'login',
     component: LoginComponent
 
   },
   {
-    path: "rooms",
+    path: 'rooms',
     component: RoomListComponent
 
   }])

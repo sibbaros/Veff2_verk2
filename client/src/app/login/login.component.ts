@@ -9,29 +9,29 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  username : string;
-  loginFailed: boolean = false;
+  username: string;
+  loginFailed = false;
   constructor(private chatService: ChatService, private router: Router) { }
 
   ngOnInit() {
   }
-  onLogin(){
-     console.log("login called in component");
+  onLogin() {
+      console.log('login called in component');
 
       this.chatService.login(this.username).subscribe(succeeded => {
-      console.log("success!");
       this.loginFailed = !succeeded;
-      if(succeeded === true){
-        this.router.navigate(["/rooms"]);
-        console.log("hi");
+      if (succeeded === true) {
+        this.router.navigate(['/rooms']);
+        console.log('hi');
       }
-      if(succeeded === false){
-        console.log("failure");
+      if (succeeded === false) {
+        console.log('failure');
       }
     });
 
     /* if(!succeeded){
-        //(ekki aðgengi því þetta er í html, service talar ekki við html)loginFailed = true;
+        //(ekki aðgengi því þetta er í html, service talar ekki
+        //við html)loginFailed = true;
         console.log("failure");
       }*/
   }

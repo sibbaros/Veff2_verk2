@@ -10,21 +10,24 @@ export class RoomComponent implements OnInit {
 
   constructor(private chatService: ChatService) { }
   //rooms : string[]
-  messages : string[]
-  chatForm : string
+  messages: string[];
+  chatForm: string;
+  room: string;
 
   ngOnInit() {
-      this.chatService.sendMessage(this.chatForm).subscribe(observer => {
+    this.room = 'lobby';
+      this.chatService.sendMessage(this.room, this.chatForm).subscribe(observer => {
      // this.messages.push("hi");
      // this.rooms.push("new room");
     })
     this.messages = [];
   }
 
-  submitForm(){
+  submitForm() {
       this.messages.push(this.chatForm);
-      this.chatService.sendMessage(this.chatForm).subscribe(value => {
-      console.log("message in room component");
+      this.room = 'lobby';
+      this.chatService.sendMessage(this.room, this.chatForm).subscribe(value => {
+      console.log('message in room component');
   //  this.messages.push(this.chatForm);
      });
   }
