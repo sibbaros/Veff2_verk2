@@ -2,11 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ChatService} from '../chat.service';
 import { Router } from '@angular/router';
 
-/* function Room(id, name){
-  this.id = id;
-  this.name = name;
-}
- let roomObjects: [{}]; */
 
 @Component({
   selector: 'app-room-list',
@@ -22,16 +17,11 @@ export class RoomListComponent implements OnInit {
   ngOnInit() {
     this.chatService.getRoomList().subscribe(list => {
       this.rooms = list;
-     // this.rooms.push(this.room.name);
+      //this.rooms.push("hi");
     });
   }
   onJoinRoom(room) {
-   // var r = new Room(1, room);
-   // this.room.id = 1; //room.id;
-   // this.room.name = room;
-   // console.log(r.name);
-    // roomObjects.push(r);
-    // this.rooms.push(room);
+
     this.chatService.joinRoom(room).subscribe(success => {
       console.log('joining success!');
       this.router.navigate(['/' + room]);
@@ -41,21 +31,23 @@ export class RoomListComponent implements OnInit {
 
   onAddRoom(roomName){
       console.log('addroom called in component');
+      // muna ad gefa theim sem gerir herbergid creator status
+      
     // var r = new Room(this.rooms.length, roomName);
-      this.chatService.joinRoom(roomName).subscribe(success => {
-       console.log('joining success!');
+     // this.chatService.joinRoom(roomName).subscribe(success => {
+      // console.log('joining success!');
      // this.rooms.push(roomName);
-      this.rooms.push(roomName);
-      this.chatService.getRoomList().subscribe(list => {
+     // this.rooms.push(roomName);
+     // this.chatService.getRoomList().subscribe(list => {
       // this.rooms = list;
       // this.rooms.push(roomName);
     //  this.roomObjects.push(r);
 
      // this.rooms.push(this.room.name);
-    });
+  //  });
    //   this.router.navigate(["/" + r.id.toString()]);
 
-    });
+   // });
     // this.chatService.joinRoom(this.room.name).subscribe(list => {
        // this.chatService.getRoomList();
       // this.chatService.getRoomList().subscribe(list => {
@@ -69,4 +61,11 @@ export class RoomListComponent implements OnInit {
   onRoomNavigate() {
       // this.router.navigate(["/rooms"]);
   }
+
+  onDisconnect(){
+    this.chatService.disconnect().subscribe(success => {
+      this.router.navigate(['/login']);
+    })
+  }
+
 }

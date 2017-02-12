@@ -6,3 +6,8 @@
 
 <input [(ngModel)]="chatForm" />
 <button (click)="submitForm()"> Send </button>
+<button (click)="privateMessage = true"> Private Message </button>
+<input [hidden]="!privateMessage" placeholder="who do you want to message?" size="30" />
+
+
+<button (click)="onPartRoom()"> Leave room </button>
