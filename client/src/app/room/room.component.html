@@ -3,13 +3,24 @@
         {{ message }}
     </li>
 </ul>
-<div>
-
-    <input class="form-control" [(ngModel)]="chatForm" />
-    <button class="btn btn-info" (click)="submitForm()"> Send </button>
-    <button class="btn btn-info" (click)="privateMessage = true"> Private Message </button>
-    <input [hidden]="!privateMessage" placeholder="who do you want to message?" size="30" />
 
 
-    <button class="btn btn-info" (click)="onPartRoom()"> Leave room </button>
-</div>
+<input class="form-control" [(ngModel)]="chatForm" />
+<button class="btn btn-info" (click)="submitForm()"> Send </button>
+<button class="btn btn-info" (click)="privateMessage = true"> Private Message </button>
+<input [hidden]="!privateMessage" placeholder="who do you want to message?" size="30" />
+
+
+
+<button "btn btn-info" (click)="onPartRoom()"> Leave room </button>
+<input type="text" [(ngModel)]="user" />
+
+<button (click)="onKickUserOut()">Kick user out</button>
+
+<button (click)="onBanUser()">Ban user</button>
+
+<ul>
+    <li *ngFor="let user of users">
+        {{ user }}
+    </li>
+</ul>

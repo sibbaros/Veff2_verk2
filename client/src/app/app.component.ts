@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ChatService} from './chat.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -7,6 +10,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app works!';
-  constructor(){ }
+  constructor(private chatService: ChatService, private router: Router) { }
+
+   onDisconnect() {
+    this.chatService.disconnect().subscribe(success => {
+      this.router.navigate(['/login']);
+    });
+  }
 }
 

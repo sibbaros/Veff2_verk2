@@ -1,6 +1,7 @@
 <div class="text-center col-md-4 col-md-offset-4">
     <input class="form-control" [(ngModel)]="username" placeholder="Username" />
     <button class="btn btn-info" (click)="onLogin()">Login</button>
+
     <div *ngIf="loginFailed">
         Sorry, but that username is already taken
     </div>

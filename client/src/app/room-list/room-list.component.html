@@ -1,11 +1,15 @@
-<ul>
-    <li *ngFor="let room of rooms">
-        {{ room }}
-        <button (click)="onJoinRoom(room)"> Join room </button>
-    </li>
-</ul>
+<div class="container">
+    <h2>Pick a room to join:</h2>
 
-<input [(ngModel)]="roomName" />
+    <table class="table table-hover table-striped">
+        <tr *ngFor="let room of rooms">
+            <td>{{ room }}</td>
+            <td><button class='btn btn-info' (click)="onJoinRoom(room)"> Join room </button></td>
+        </tr>
+    </table>
+    <h2>Or create a new room: </h2>
+    <input class="form-control" [(ngModel)]="roomName" placeholder="Put room name here" />
 
-<button (click)="onAddRoom()"> Add Room </button>
-<button (click)="onDisconnect()"> Leave My Chat </button>
+
+    <button class='btn btn-info' (click)="onAddRoom()"> Add Room </button>
+</div>

@@ -10,19 +10,27 @@ import { Router } from '@angular/router';
 export class RoomComponent implements OnInit {
 
   constructor(private chatService: ChatService, private router: Router) { }
-  //rooms : string[]
+  // rooms : string[]
   messages: string[];
+  users: string[];
   chatForm: string;
   room: string;
-  privateMessage: boolean = false;
+  user: string;
+  privateMessage = false;
+  kicked: boolean;
 
   ngOnInit() {
     this.room = 'lobby';
-      //this.chatService.sendMessage(this.room, this.chatForm).subscribe(observer => {
+      // this.chatService.sendMessage(this.room, this.chatForm).subscribe(observer => {
      // this.messages.push("hi");
      // this.rooms.push("new room");
   //  })
     this.messages = [];
+    this.kicked = false;
+    this.chatService.getUsers().subscribe(list => {
+      this.users = list;
+      this.users.push(this.user);
+    });
   }
 
   submitForm() {
@@ -35,8 +43,22 @@ export class RoomComponent implements OnInit {
      this.chatForm = '';
   }
 
-  onKickUserOut(username){
-    
+  onKickUserOut() {
+    const userInfo = {user: this.user, room: this.room};
+
+    this.chatService.kickUserOut(userInfo).subscribe(succeeded => {
+      console.log('kick user success!');
+       this.kicked = true;
+       this.router.navigate(['/rooms']);
+    });
+  }
+
+  onBanUser() {
+    const userInfo = {user: this.user, room: this.room};
+
+    this.chatService.banUser(userInfo).subscribe(succeeded => {
+      console.log('ban user success!');
+    });
   }
 
   onPartRoom() {
