@@ -1,5 +1,7 @@
-<input [(ngModel)]="username" />
-<button (click)="onLogin()">Login</button>
-<div *ngIf="loginFailed">
-    Sorry, but that username is already taken
+<div class="container">
+    <input class="form-control" [(ngModel)]="username" />
+    <button (click)="onLogin()" class="btn btn-default" type="submit">Login</button>
+    <div *ngIf="loginFailed">
+        Sorry, but that username is already taken
+    </div>
 </div>

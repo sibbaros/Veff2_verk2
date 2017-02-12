@@ -17,7 +17,7 @@ export class RoomListComponent implements OnInit {
   ngOnInit() {
     this.chatService.getRoomList().subscribe(list => {
       this.rooms = list;
-      //this.rooms.push("hi");
+      // this.rooms.push("hi");
     });
   }
   onJoinRoom(room) {
@@ -29,10 +29,9 @@ export class RoomListComponent implements OnInit {
     });
   }
 
-  onAddRoom(roomName){
+  onAddRoom(roomName) {
       console.log('addroom called in component');
       // muna ad gefa theim sem gerir herbergid creator status
-      
     // var r = new Room(this.rooms.length, roomName);
      // this.chatService.joinRoom(roomName).subscribe(success => {
       // console.log('joining success!');
@@ -62,10 +61,10 @@ export class RoomListComponent implements OnInit {
       // this.router.navigate(["/rooms"]);
   }
 
-  onDisconnect(){
+  onDisconnect() {
     this.chatService.disconnect().subscribe(success => {
       this.router.navigate(['/login']);
-    })
+    });
   }
 
 }

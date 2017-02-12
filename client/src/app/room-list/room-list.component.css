@@ -1,0 +1,15 @@
+.table {
+    width: 50%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.form-control {
+    width: 50%;
+    margin-bottom: 5px;
+}
+
+.container {
+    padding: 5%;
+    margin-left: 30%;
+}
