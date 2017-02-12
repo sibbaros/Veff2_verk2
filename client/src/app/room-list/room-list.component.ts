@@ -30,13 +30,21 @@ export class RoomListComponent implements OnInit {
   }
 
   onAddRoom(roomName){
+    // muna ad gefa theim sem gerir herbergid creator status
+    this.chatService.getRoomList().subscribe(list => {
       console.log('addroom called in component');
-      // muna ad gefa theim sem gerir herbergid creator status
+      console.log(this.roomName);
+      list.push(roomName);
+
+    });
+      
+
+      
       
     // var r = new Room(this.rooms.length, roomName);
      // this.chatService.joinRoom(roomName).subscribe(success => {
       // console.log('joining success!');
-     // this.rooms.push(roomName);
+     //this.rooms.push(roomName);
      // this.rooms.push(roomName);
      // this.chatService.getRoomList().subscribe(list => {
       // this.rooms = list;

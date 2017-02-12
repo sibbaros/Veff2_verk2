@@ -32,6 +32,7 @@ export class ChatService {
 
         const strArr: string[] = [];
         for(let x in list) {
+          //console.log(x);
           strArr.push(x);
         }
         observer.next(strArr);
@@ -65,6 +66,13 @@ export class ChatService {
         observer.next(message);
         });
     return observable;
+  }
+  
+  privarMessage(username: string, message:string): Observable<string> {
+     const observable = new Observable(observer => {
+        
+        });
+      return observable;
   }
 
   // laga þetta fall: 
