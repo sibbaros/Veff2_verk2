@@ -12,12 +12,12 @@
 
 
 
-<button (click)="onPartRoom()"> Leave room </button>
+<button class="btn btn-info" (click)="onPartRoom()"> Leave room </button>
 <input type="text" [(ngModel)]="user" />
 
-<button (click)="onKickUserOut()">Kick user out</button>
+<button class="btn btn-info" (click)="onKickUserOut()">Kick user out</button>
 
-<button (click)="onBanUser()">Ban user</button>
+<button class="btn btn-info" (click)="onBanUser()">Ban user</button>
 
 <ul>
     <li *ngFor="let user of users">
