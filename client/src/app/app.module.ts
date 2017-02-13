@@ -28,10 +28,6 @@ import { ChatService } from './chat.service';
     pathMatch: 'full'
   },
   {
-    path: 'lobby',
-    component: RoomComponent,
-  },
-  {
     path: 'login',
     component: LoginComponent
 
@@ -40,6 +36,10 @@ import { ChatService } from './chat.service';
     path: 'rooms',
     component: RoomListComponent
 
+  },
+  {
+    path: 'rooms/:id',
+    component: RoomComponent
   }])
 
   ],
