@@ -74,18 +74,15 @@ export class ChatService {
     return observable;
   }
 
-  sendMessage(roomName: string, message: string): Observable<string> {
+  sendMessage(param): Observable<string> {
     const observable = new Observable(observer => {
-        this.socket.emit('sendmsg', roomName, message); /*  succeeded => {*/
+        this.socket.emit('sendmsg', param); 
           console.log('message received');
-          this.socket.emit('updatechat');
-       // });
-        observer.next(message);
         });
     return observable;
   }
 
-  privarMessage(username: string, message: string): Observable<string> {
+  privateMessage(username: string, message: string): Observable<string> {
      const observable = new Observable(observer => {
 
         });
