@@ -17,7 +17,6 @@ export class RoomListComponent implements OnInit {
   ngOnInit() {
     this.chatService.getRoomList().subscribe(list => {
       this.rooms = list;
-      // this.rooms.push("hi");
     });
   }
   onJoinRoom(room) {
