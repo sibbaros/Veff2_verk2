@@ -11,7 +11,7 @@ export class RoomComponent implements OnInit {
 
   constructor(private chatService: ChatService, private router: Router, private route: ActivatedRoute) { }
   // rooms : string[]
-  messages: string[];
+  messages: [{}];
   users: string[];
   chatForm: string;
   room: string;
@@ -29,11 +29,9 @@ export class RoomComponent implements OnInit {
   }
 
   submitMessage() {
-     // this.messages.push(this.chatForm);
       this.chatService.sendMessage(this.room, this.chatForm).subscribe(value => {
         console.log('message in room component');
         this.messages = value;
-  //  this.messages.push(this.chatForm);
      });
      this.chatForm = '';
   }

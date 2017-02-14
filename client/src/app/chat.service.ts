@@ -73,26 +73,23 @@ export class ChatService {
     return observable;
   }
 
-  sendMessage(room: string, message: string): Observable<string[]> {
+  sendMessage(room: string, message: string): Observable<any> {
     const observable = new Observable(observer => {
         const param = {
           roomName: room,
           msg: message
         };
-        console.log(param);
         this.socket.emit('sendmsg', param);
-        this.socket.on('updatechat', (roomName, roomMessageHistory) => {
-          console.log("hello from the other side");
-          console.log(roomName);
-          console.log(roomMessageHistory);          
-          const strArr: string[] = [ ];
-          // for (const x in list) {
-          //   if (list.hasOwnProperty(x)) {
-          //     strArr.push(x);
-          //   }
-          // }
-          observer.next(strArr);
-        });
+        this.socket.on('updatechat', (roomName, roomMessageHistory) => {        
+          let arr = [{ }];
+           
+         for(let i = 0; i < roomMessageHistory.length; i++){
+           let x = {nick: roomMessageHistory[i].nick, 
+                    message: roomMessageHistory[i].message};
+            arr[i] = x;
+          }
+                    observer.next(arr);
+       });
     });
     return observable;
   }
