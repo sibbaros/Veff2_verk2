@@ -79,16 +79,18 @@ export class ChatService {
           roomName: room,
           msg: message
         };
+        console.log(param);
         this.socket.emit('sendmsg', param);
-          console.log('message received');
-        this.socket.on('updatechat', (list) => {
-          console.log("hi");
+        this.socket.on('updatechat', (roomName, roomMessageHistory) => {
+          console.log("hello from the other side");
+          console.log(roomName);
+          console.log(roomMessageHistory);          
           const strArr: string[] = [ ];
-          for (const x in list) {
-            if (list.hasOwnProperty(x)) {
-              strArr.push(x);
-            }
-          }
+          // for (const x in list) {
+          //   if (list.hasOwnProperty(x)) {
+          //     strArr.push(x);
+          //   }
+          // }
           observer.next(strArr);
         });
     });
