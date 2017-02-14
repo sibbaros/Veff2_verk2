@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class = 'chatBox form-control'>
     <ul>
         <li *ngFor="let message of messages">
@@ -7,6 +8,16 @@
 </div>
 
 <input class="form-control" [(ngModel)]="chatForm" placeholder="Share your thoughts..." />
+=======
+<ul>
+    <li *ngFor="let message of messages">
+        {{ message.nick}} {{ message.message }}
+    </li>
+</ul>
+
+
+<input class="form-control" [(ngModel)]="chatForm" />
+>>>>>>> 3a88239c6e3a69e77bfca4ccf297b32e1f6ff649
 <button class="btn btn-info" (click)="submitMessage()"> Send </button>
 <button class="btn btn-info" (click)="privateMessage = true"> Private Message </button>
 <input [hidden]="!privateMessage" placeholder="who do you want to message?" size="30" />

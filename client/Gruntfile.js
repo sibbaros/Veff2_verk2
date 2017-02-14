@@ -45,5 +45,5 @@ module.exports = function ( grunt ) {
 	grunt.initConfig(taskConfig);
 
 	grunt.registerTask('default',['tslint']);
-	grunt.registerTask('minify', ['uglify']);
+	//grunt.registerTask('minify', ['uglify']);
 }

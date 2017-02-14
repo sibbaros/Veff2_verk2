@@ -47,10 +47,9 @@ export class ChatService {
     const observable = new Observable(observer => {
       this.socket.emit('users');
       this.socket.on('userlist', (list) => {
-
         const strArr: string[] = [ ];
         for (const x in list) {
-          if (list.hasOwnProperty(x)){
+          if (list.hasOwnProperty(x)) {
             strArr.push(x);
           }
         }
@@ -63,9 +62,9 @@ export class ChatService {
 
   joinRoom(roomName): Observable<boolean> {
     const observable = new Observable(observer => {
-      let param = {
+      const param = {
         room: roomName
-      }
+      };
       this.socket.emit('joinroom', param, function(a, b) {
         observer.next(a);
       });
@@ -74,11 +73,24 @@ export class ChatService {
     return observable;
   }
 
-  sendMessage(param): Observable<string> {
+  sendMessage(room: string, message: string): Observable<any> {
     const observable = new Observable(observer => {
-        this.socket.emit('sendmsg', param); 
-          console.log('message received');
-        });
+        const param = {
+          roomName: room,
+          msg: message
+        };
+        this.socket.emit('sendmsg', param);
+        this.socket.on('updatechat', (roomName, roomMessageHistory) => {        
+          let arr = [{ }];
+           
+         for(let i = 0; i < roomMessageHistory.length; i++){
+           let x = {nick: roomMessageHistory[i].nick, 
+                    message: roomMessageHistory[i].message};
+            arr[i] = x;
+          }
+                    observer.next(arr);
+       });
+    });
     return observable;
   }
 
