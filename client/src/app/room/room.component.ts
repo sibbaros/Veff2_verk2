@@ -22,6 +22,9 @@ export class RoomComponent implements OnInit {
   ngOnInit() {
     this.room = this.route.snapshot.params['id'];
     this.kicked = false;
+    this.chatService.sendMessage(this.room, "Hi, I'm new!").subscribe(value => {
+        this.messages = value;
+     });
     this.chatService.getUsers().subscribe(list => {
       this.users = list;
       this.users.push(this.user);
@@ -30,7 +33,6 @@ export class RoomComponent implements OnInit {
 
   submitMessage() {
       this.chatService.sendMessage(this.room, this.chatForm).subscribe(value => {
-        console.log('message in room component');
         this.messages = value;
      });
      this.chatForm = '';

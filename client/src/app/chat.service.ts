@@ -83,12 +83,12 @@ export class ChatService {
         this.socket.on('updatechat', (roomName, roomMessageHistory) => {        
           let arr = [{ }];
            
-         for(let i = 0; i < roomMessageHistory.length; i++){
-           let x = {nick: roomMessageHistory[i].nick, 
+        for(let i = 0; i < roomMessageHistory.length; i++) {
+          let x = {nick: roomMessageHistory[i].nick, 
                     message: roomMessageHistory[i].message};
-            arr[i] = x;
-          }
-                    observer.next(arr);
+          arr[i] = x;
+        }
+          observer.next(arr);
        });
     });
     return observable;
@@ -96,6 +96,14 @@ export class ChatService {
 
   privateMessage(username: string, message: string): Observable<string> {
      const observable = new Observable(observer => {
+       const param = {
+         nick: username,
+         message: message
+       }
+       this.socket.emit('privatemsg', param, succeeded => {
+          observer.next(succeeded);
+          console.log("sending the private message!");
+       });
 
         });
       return observable;

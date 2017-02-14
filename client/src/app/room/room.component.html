@@ -1,9 +1,10 @@
-<div class = 'chatBox form-control'>
-    <ul>
-        <li *ngFor="let message of messages">
-            {{ message.nick}} {{ message.message }}
-        </li>
-    </ul>
+<div class='chatBox form-control'>
+    <table class="table table-hover">
+        <tr *ngFor="let message of messages">
+            <td>{{ message.nick }}</td>
+            <td>{{ message.message}}</td>
+        </tr>
+    </table>
 </div>
 
 <input class="form-control" [(ngModel)]="chatForm" placeholder="Share your thoughts..." />
