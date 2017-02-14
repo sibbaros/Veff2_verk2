@@ -23,7 +23,7 @@ export class RoomListComponent implements OnInit {
 
     this.chatService.joinRoom(room).subscribe(success => {
       console.log('joining success!');
-      if (success === true){
+      if (success === true) {
         this.router.navigate(['rooms', room]);
       }
     });

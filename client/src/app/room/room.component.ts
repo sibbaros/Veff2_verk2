@@ -20,8 +20,7 @@ export class RoomComponent implements OnInit {
   kicked: boolean;
 
   ngOnInit() {
-    this.room = "lobby";
-    this.messages = [];
+    this.room = 'lobby';
     this.kicked = false;
     this.chatService.getUsers().subscribe(list => {
       this.users = list;
@@ -30,14 +29,10 @@ export class RoomComponent implements OnInit {
   }
 
   submitMessage() {
-      this.messages.push(this.chatForm);
-      this.room = 'lobby';
-      let param = {
-        roomName: this.room,
-        msg: this.chatForm
-      }
-      this.chatService.sendMessage(param).subscribe(value => {
+     // this.messages.push(this.chatForm);
+      this.chatService.sendMessage(this.room, this.chatForm).subscribe(value => {
         console.log('message in room component');
+        this.messages = value;
   //  this.messages.push(this.chatForm);
      });
      this.chatForm = '';
