@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../chat.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-room',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class RoomComponent implements OnInit {
 
-  constructor(private chatService: ChatService, private router: Router) { }
+  constructor(private chatService: ChatService, private router: Router, private route: ActivatedRoute) { }
   // rooms : string[]
   messages: string[];
   users: string[];
@@ -20,7 +20,7 @@ export class RoomComponent implements OnInit {
   kicked: boolean;
 
   ngOnInit() {
-    this.room = 'lobby';
+    this.room = this.route.snapshot.params['id'];
     this.kicked = false;
     this.chatService.getUsers().subscribe(list => {
       this.users = list;
