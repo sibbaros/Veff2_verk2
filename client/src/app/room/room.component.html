@@ -1,14 +1,16 @@
-<ul>
-    <li *ngFor="let message of messages">
-        {{ message }}
-    </li>
-</ul>
+<div class='chatBox form-control'>
+    <table>
+        <tr *ngFor="let message of messages">
+            <td>{{ message.nick}} </td>
+            <td> {{ message.message }}</td>
+        </tr>
+    </table>
+</div>
 
-
-<input class="form-control" [(ngModel)]="chatForm" />
+<input class="form-control" [(ngModel)]="chatForm" placeholder="Share your thoughts..." />
 <button class="btn btn-info" (click)="submitMessage()"> Send </button>
 <button class="btn btn-info" (click)="privateMessage = true"> Private Message </button>
-<input [hidden]="!privateMessage" class="form-control" placeholder="who do you want to message?" size="30" />
+<input [hidden]="!privateMessage" class="form-control" [(ngModel)]="privateForm" placeholder="who do you want to message?" size="30" />
 
 
 

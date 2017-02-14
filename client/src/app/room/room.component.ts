@@ -12,10 +12,10 @@ export class RoomComponent implements OnInit {
 
   constructor(private chatService: ChatService, private router: Router, private route: ActivatedRoute) { }
   // rooms : string[]
-
-  messages: string[];
+  messages: [{}];
   users: string[];
   chatForm: string;
+  privateForm: string;
   room: string;
   user: string;
   privateMessage = false;
@@ -31,13 +31,18 @@ export class RoomComponent implements OnInit {
   }
 
   submitMessage() {
-      this.messages.push(this.chatForm);
       this.chatService.sendMessage(this.room, this.chatForm).subscribe(value => {
         console.log('message in room component');
         this.messages = value;
-      //  this.messages.push(this.chatForm);
      });
      this.chatForm = '';
+  }
+
+  submitPrivateMessage() {
+    this.chatService.privateMessage(this.user, this.privateForm).subscribe(value => {
+      console.log('this is private');
+      
+    });
   }
 
   onKickUserOut() {

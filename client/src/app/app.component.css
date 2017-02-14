@@ -2,3 +2,14 @@
     margin-right: 10%;
     margin-left: 85%;
 }
+
+h1 {
+    background-color: lightskyblue;
+    -webkit-text-fill-color: white;
+    text-align: center;
+    font-family: sans-serif;
+    font-style: italic;
+    font-size: 22pt;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}

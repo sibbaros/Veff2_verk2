@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'Chatter';
   constructor(private chatService: ChatService, private router: Router) { }
 
    onDisconnect() {
