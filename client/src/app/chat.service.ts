@@ -61,6 +61,7 @@ export class ChatService {
     return observable;
   }
 
+
   joinRoom(roomName): Observable<boolean> {
     const observable = new Observable(observer => {
       let param = {
@@ -78,6 +79,7 @@ export class ChatService {
     const observable = new Observable(observer => {
         this.socket.emit('sendmsg', param); 
           console.log('message received');
+          console.log(param);
         });
     return observable;
   }

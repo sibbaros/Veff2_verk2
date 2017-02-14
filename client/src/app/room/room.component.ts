@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class RoomComponent implements OnInit {
 
   constructor(private chatService: ChatService, private router: Router) { }
-  // rooms : string[]
+  //rooms : string[]
   messages: string[];
   users: string[];
   chatForm: string;
@@ -20,7 +20,7 @@ export class RoomComponent implements OnInit {
   kicked: boolean;
 
   ngOnInit() {
-    this.room = "lobby";
+    this.room = 'lobby';
     this.messages = [];
     this.kicked = false;
     this.chatService.getUsers().subscribe(list => {
@@ -31,14 +31,13 @@ export class RoomComponent implements OnInit {
 
   submitMessage() {
       this.messages.push(this.chatForm);
-      this.room = 'lobby';
       let param = {
         roomName: this.room,
         msg: this.chatForm
       }
       this.chatService.sendMessage(param).subscribe(value => {
         console.log('message in room component');
-  //  this.messages.push(this.chatForm);
+        this.messages.push(this.chatForm);
      });
      this.chatForm = '';
   }
@@ -64,6 +63,7 @@ export class RoomComponent implements OnInit {
   onPartRoom() {
 
     this.chatService.partRoom(this.room).subscribe(success => {
+      console.log(this.room);
       console.log('parting success!');
       this.router.navigate(['/rooms']);
 
