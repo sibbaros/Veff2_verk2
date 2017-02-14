@@ -60,6 +60,7 @@ export class ChatService {
     return observable;
   }
 
+
   joinRoom(roomName): Observable<boolean> {
     const observable = new Observable(observer => {
       const param = {

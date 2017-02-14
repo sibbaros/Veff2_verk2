@@ -9,11 +9,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RoomComponent implements OnInit {
 
+
   constructor(private chatService: ChatService, private router: Router, private route: ActivatedRoute) { }
   // rooms : string[]
   messages: [{}];
   users: string[];
   chatForm: string;
+  privateForm: string;
   room: string;
   user: string;
   privateMessage = false;
@@ -38,6 +40,13 @@ export class RoomComponent implements OnInit {
      this.chatForm = '';
   }
 
+  submitPrivateMessage() {
+    this.chatService.privateMessage(this.user, this.privateForm).subscribe(value => {
+      console.log('this is private');
+      
+    });
+  }
+
   onKickUserOut() {
     const userInfo = {user: this.user, room: this.room};
 
@@ -59,6 +68,7 @@ export class RoomComponent implements OnInit {
   onPartRoom() {
 
     this.chatService.partRoom(this.room).subscribe(success => {
+      console.log(this.room);
       console.log('parting success!');
       this.router.navigate(['/rooms']);
 
