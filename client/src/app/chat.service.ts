@@ -50,7 +50,7 @@ export class ChatService {
         const strArr: string[] = [ ];
         for (const x in list) {
           if (list.hasOwnProperty(x)) {
-            strArr.push(x);
+            strArr.push(list[x]);
           }
         }
         observer.next(strArr);
