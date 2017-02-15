@@ -117,13 +117,11 @@ io.sockets.on('connection', function (socket) {
 		//Check if user is allowed to send message.
 		if(rooms[data.roomName].users[socket.username] !== undefined) {
 			userAllowed = true;
-			console.log("skellibjalla");
 		}
 		if(rooms[data.roomName].ops[socket.username] !== undefined) {
 			userAllowed = true;
-			console.log("péturpan");
 		}
-		console.log(data);
+
 		if(userAllowed) {
 			//Update the message history for the room that the user sent the message to.
 			var messageObj = {
@@ -131,7 +129,7 @@ io.sockets.on('connection', function (socket) {
 				timestamp :  new Date(),
 				message : data.msg.substring(0, 200)
 			};
-			console.log(messageObj);
+			
 			rooms[data.roomName].addMessage(messageObj);
 			io.sockets.emit('updatechat', data.roomName, rooms[data.roomName].messageHistory);
 		}

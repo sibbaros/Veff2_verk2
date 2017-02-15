@@ -30,6 +30,8 @@ export class RoomComponent implements OnInit {
     this.chatService.getUsers().subscribe(list => {
       this.users = list;
       this.users.push(this.user);
+      //console.log(this.user);
+      //console.log(list);
     });
   }
 
