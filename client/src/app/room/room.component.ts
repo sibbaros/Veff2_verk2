@@ -69,8 +69,8 @@ export class RoomComponent implements OnInit {
       console.log('ban user success!');
     });
     this.chatService.sendMessage(this.room, this.user +" has been banned from the room").subscribe(value => {
-        this.messages = value;
-     });
+       this.messages = value;
+    });
     
   }
 
