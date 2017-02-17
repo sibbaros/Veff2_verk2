@@ -103,6 +103,7 @@ export class ChatService {
        }
        this.socket.emit('privatemsg', param, succeeded => {
           observer.next(succeeded);
+          
           console.log("sending the private message!");
        });
 
