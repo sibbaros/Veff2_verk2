@@ -20,6 +20,7 @@ export class RoomComponent implements OnInit {
   user: string;
   privateMessage = false;
   kicked: boolean;
+  banned
 
   ngOnInit() {
     this.room = this.route.snapshot.params['id'];
@@ -65,6 +66,10 @@ export class RoomComponent implements OnInit {
     this.chatService.banUser(userInfo).subscribe(succeeded => {
       console.log('ban user success!');
     });
+    this.chatService.sendMessage(this.room, this.user +" has been banned from the room").subscribe(value => {
+       this.messages = value;
+    });
+    
   }
 
   onPartRoom() {

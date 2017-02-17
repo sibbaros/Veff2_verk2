@@ -242,9 +242,11 @@ io.sockets.on('connection', function (socket) {
 
 	//Handles banning the user from a room.
 	socket.on('ban', function (banObj, fn) {
+		console.log("hello its me");
 		if(rooms[banObj.room].ops[socket.username] !== undefined) {
 			//Remove the channel from the user in the global user roster.
 			delete users[banObj.user].channels[banObj.room];
+			console.log("I've been wondering if after all these years you'd like to meet");
 			//Add the user to the ban list and remove him from the room user roster.
 			rooms[banObj.room].banUser(banObj.user);
 			//Kick the user from the room.
