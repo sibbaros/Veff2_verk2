@@ -29,7 +29,9 @@ export class RoomComponent implements OnInit {
      });
     this.chatService.getUsers().subscribe(list => {
       this.users = list;
-      this.users.push(this.user);
+      console.log("fer hingad inn!");
+      console.log(this.users);
+     // this.users.push(this.user);
     });
   }
 
