@@ -153,4 +153,21 @@ export class ChatService {
     });
     return observable;
   }
+
+  updateUsers(room: string, user: string[], owner: string): Observable<string[]> {
+    const observable = new Observable(observer =>{
+      this.socket.emit('updateusers');
+       this.socket.on('userlist', (list) => {
+        const strArr: string[] = [ ];
+        for (const x in list) {
+          if (list.hasOwnProperty(x)) {
+            strArr.push(list[x]);
+          }
+        }
+        observer.next(strArr);
+      });
+    });
+
+    return observable;
+  }
 }
