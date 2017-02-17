@@ -161,10 +161,12 @@ io.sockets.on('connection', function (socket) {
 
 	// when the user disconnects.. perform this
 	socket.on('disconnect', function(){
+		console.log("this is not the right place");
 		if(socket.username) {
 			//If the socket doesn't have a username the client joined and parted without
 			//chosing a username, so we just close the socket without any cleanup.
 			for(var room in users[socket.username].channels) {
+				console.log("this is the right place");
 				//Remove the user from users/ops lists in the rooms he's currently in.
 				delete rooms[room].users[socket.username];
 				delete rooms[room].ops[socket.username];
@@ -181,8 +183,9 @@ io.sockets.on('connection', function (socket) {
 	//When a user tries to kick another user this gets performed.
 	socket.on('kick', function (kickObj, fn) {
 		console.log(socket.username + " kicked " + kickObj.user + " from " + kickObj.room);
-
+		console.log(rooms[kickObj.room].ops[socket.username]);
 		if(rooms[kickObj.room].ops[socket.username] !== undefined) {
+			console.log("you made it here");
 			//Remove the user from the room roster.
 			delete rooms[kickObj.room].users[kickObj.user];
 			//Remove the user from the ops roster.

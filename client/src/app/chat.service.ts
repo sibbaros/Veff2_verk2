@@ -145,6 +145,7 @@ export class ChatService {
   }
 
    disconnect(): Observable<boolean> {
+     console.log("in disconnect");
     const observable = new Observable(observer => {
       this.socket.emit('disconnect');
       observer.next();

@@ -30,8 +30,6 @@ export class RoomComponent implements OnInit {
     this.chatService.getUsers().subscribe(list => {
       this.users = list;
       this.users.push(this.user);
-      //console.log(this.user);
-      //console.log(list);
     });
   }
 
@@ -51,12 +49,14 @@ export class RoomComponent implements OnInit {
 
   onKickUserOut() {
     const userInfo = {user: this.user, room: this.room};
-
+    
     this.chatService.kickUserOut(userInfo).subscribe(succeeded => {
       console.log('kick user success!');
        this.kicked = true;
-       this.router.navigate(['/rooms']);
     });
+    this.chatService.sendMessage(this.room, this.user +" has been kicked out of the room").subscribe(value => {
+        this.messages = value;
+     });
   }
 
   onBanUser() {
