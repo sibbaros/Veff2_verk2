@@ -43,9 +43,10 @@ export class ChatService {
     return observable;
   }
 
+
    getUsers(): Observable<string[]> {
     const observable = new Observable(observer => {
-      this.socket.emit('users');
+     /* this.socket.emit('users');
       this.socket.on('userlist', (list) => {
         const strArr: string[] = [ ];
         for (const x in list) {
@@ -54,7 +55,19 @@ export class ChatService {
           }
         }
         observer.next(strArr);
-      });
+      });*/
+      
+       this.socket.on('updateusers', (roomName, roomUsers, ops) => {
+        let arr: string[] = [ ];
+
+        for(const x in roomUsers){
+            if(roomUsers.hasOwnProperty(x)){
+               arr.push(roomUsers[x]);
+            }
+       }
+            observer.next(arr);  
+
+     })
     });
 
     return observable;
@@ -67,8 +80,11 @@ export class ChatService {
         room: roomName
       };
       this.socket.emit('joinroom', param, function(a, b) {
+        //this.getUsers();
+       
         observer.next(a);
       });
+    
       console.log('joinRoom chat service');
     });
     return observable;
@@ -116,8 +132,8 @@ export class ChatService {
     const observable = new Observable(observer => {
       this.socket.emit('partroom', room);
         console.log('partRoom chat service');
-        this.socket.emit('updateusers');
-        this.socket.emit('servermessage', 'part');
+      //  this.socket.emit('updateusers');
+      //  this.socket.emit('servermessage', 'part');
         const success = true;
       observer.next(success);
     });
