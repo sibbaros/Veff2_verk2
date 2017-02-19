@@ -38,6 +38,17 @@ export class RoomComponent implements OnInit {
           this.router.navigate(['/rooms']);
       }
     });
+    
+
+    this.chatService.ban().subscribe(banned => {
+      if (banned === this.user){
+        this.router.navigate(['/rooms']);
+      }
+     // console.log('succeeded(ban): ' + succeeded);
+     // if (succeeded === this.user) {
+       //   this.router.navigate(['/rooms']);
+     // }
+    });
 
    /* this.chatService.banUser(userInfo).subscribe(succeeded => {
             console.log('succeeded: ' + succeeded);

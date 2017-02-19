@@ -9,6 +9,7 @@ export class ChatService {
 
   socket: any;
   username: string;
+  banned: boolean = false;
 
   constructor(private router: Router) {
     this.socket = io('http://localhost:8080');
@@ -152,8 +153,33 @@ export class ChatService {
     return observable;
   }
 
-   banUser(userInfo): Observable<any> {
-     console.log("userInfo: " + userInfo);
+  ban(): Observable<any> {
+    const observable = new Observable(observer => {
+     // observer.next(this.banned);
+       this.socket.on('banned', (room, bannedUser, banner) => {
+        console.log("banned is " + bannedUser);
+        console.log("banner is" + banner);
+        if (bannedUser === this.username){
+          this.banned = true;
+        }
+        observer.next(bannedUser);
+      })
+    });
+
+    return observable;
+  }
+     banUser(userInfo): Observable<any> {
+    const observable = new Observable(observer => {
+      this.socket.emit('ban', userInfo, succeeded => {
+        observer.next(succeeded);
+      });
+     
+    });
+
+    return observable;
+  }
+ /*  banUser(userInfo): Observable<any> {
+    console.log("userInfo: " + userInfo);
     const observable = new Observable(observer => {
       this.socket.emit('ban', userInfo, succeeded => {
         console.log('ban succeeded!');
@@ -167,7 +193,7 @@ export class ChatService {
     });
 
     return observable;
-  }
+  }*/
 
    disconnect(): Observable<boolean> {
      console.log('in disconnect');
