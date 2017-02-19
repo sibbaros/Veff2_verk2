@@ -17,7 +17,9 @@
 
 
 <button class="btn btn-info" (click)="onPartRoom()"> Leave room </button>
-<input type="text" class="form-control small" [(ngModel)]="user" />
+<input type="text" class="form-control small" [(ngModel)]="kickedUser" />
+<input type="text" class="form-control small" [(ngModel)]="bannedUser" placeholder="who do you want to ban?" />
+
 
 <button class="btn btn-info" (click)="onKickUserOut()">Kick user out</button>
 

@@ -129,7 +129,6 @@ io.sockets.on('connection', function (socket) {
 				timestamp :  new Date(),
 				message : data.msg.substring(0, 200)
 			};
-
 			rooms[data.roomName].addMessage(messageObj);
 			io.sockets.emit('updatechat', data.roomName, rooms[data.roomName].messageHistory);
 		}
@@ -161,12 +160,10 @@ io.sockets.on('connection', function (socket) {
 
 	// when the user disconnects.. perform this
 	socket.on('disconnect', function(){
-		console.log("this is not the right place");
 		if(socket.username) {
 			//If the socket doesn't have a username the client joined and parted without
 			//chosing a username, so we just close the socket without any cleanup.
 			for(var room in users[socket.username].channels) {
-				console.log("this is the right place");
 				//Remove the user from users/ops lists in the rooms he's currently in.
 				delete rooms[room].users[socket.username];
 				delete rooms[room].ops[socket.username];
@@ -183,9 +180,8 @@ io.sockets.on('connection', function (socket) {
 	//When a user tries to kick another user this gets performed.
 	socket.on('kick', function (kickObj, fn) {
 		console.log(socket.username + " kicked " + kickObj.user + " from " + kickObj.room);
-		console.log(rooms[kickObj.room].ops[socket.username]);
+
 		if(rooms[kickObj.room].ops[socket.username] !== undefined) {
-			console.log("you made it here");
 			//Remove the user from the room roster.
 			delete rooms[kickObj.room].users[kickObj.user];
 			//Remove the user from the ops roster.
@@ -242,11 +238,9 @@ io.sockets.on('connection', function (socket) {
 
 	//Handles banning the user from a room.
 	socket.on('ban', function (banObj, fn) {
-		console.log("hello its me");
 		if(rooms[banObj.room].ops[socket.username] !== undefined) {
 			//Remove the channel from the user in the global user roster.
 			delete users[banObj.user].channels[banObj.room];
-			console.log("I've been wondering if after all these years you'd like to meet");
 			//Add the user to the ban list and remove him from the room user roster.
 			rooms[banObj.room].banUser(banObj.user);
 			//Kick the user from the room.

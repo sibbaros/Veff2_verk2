@@ -28,11 +28,5 @@ export class LoginComponent implements OnInit {
         console.log('failure');
       }
     });
-
-    /* if(!succeeded){
-        //(ekki aðgengi því þetta er í html, service talar ekki
-        //við html)loginFailed = true;
-        console.log("failure");
-      }*/
   }
 }

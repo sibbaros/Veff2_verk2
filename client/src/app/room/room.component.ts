@@ -9,29 +9,43 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RoomComponent implements OnInit {
 
-
-  constructor(private chatService: ChatService, private router: Router, private route: ActivatedRoute) { }
-  // rooms : string[]
   messages: [{}];
   users: string[];
   chatForm: string;
   privateForm: string;
   room: string;
-  user: string;
+  kickedUser: string;
   privateMessage = false;
-  kicked: boolean;
-  banned
+  user: string;
+  constructor(private chatService: ChatService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.room = this.route.snapshot.params['id'];
-    this.kicked = false;
+    this.user = this.chatService.username;
     this.chatService.sendMessage(this.room, "Hi, I'm new!").subscribe(value => {
         this.messages = value;
      });
-    this.chatService.getUsers().subscribe(list => {
+     console.log("this user issss: " + this.user);
+    this.chatService.getUsers(this.room).subscribe(list => {
       this.users = list;
-      this.users.push(this.user);
     });
+
+    const userInfo = {user: this.kickedUser, room: this.room};
+    console.log("user info room cp: " + userInfo);
+    this.chatService.kickUserOut(userInfo).subscribe(succeeded => {
+      console.log('succeeded: ' + succeeded);
+      if (succeeded === this.user) {
+          this.router.navigate(['/rooms']);
+      }
+    });
+
+   /* this.chatService.banUser(userInfo).subscribe(succeeded => {
+            console.log('succeeded: ' + succeeded);
+
+     // if (succeeded === this.user) {
+       //   this.router.navigate(['/rooms']);
+     // }
+    });*/
   }
 
   submitMessage() {
@@ -44,32 +58,37 @@ export class RoomComponent implements OnInit {
   submitPrivateMessage() {
     this.chatService.privateMessage(this.user, this.privateForm).subscribe(value => {
       console.log('this is private');
-      
+
     });
   }
 
   onKickUserOut() {
-    const userInfo = {user: this.user, room: this.room};
-    
+    const userInfo = {user: this.kickedUser, room: this.room};
+
     this.chatService.kickUserOut(userInfo).subscribe(succeeded => {
-      console.log('kick user success!');
-       this.kicked = true;
+      if (succeeded) {
+         this.chatService.sendMessage(this.room, this.kickedUser + ' has been kicked out of the room').subscribe(value => {
+          this.messages = value;
+        });
+      }
+     this.kickedUser = '';
     });
-    this.chatService.sendMessage(this.room, this.user +" has been kicked out of the room").subscribe(value => {
-        this.messages = value;
-     });
+
   }
 
   onBanUser() {
-    const userInfo = {user: this.user, room: this.room};
+    const userInfo = {user: this.kickedUser, room: this.room};
 
     this.chatService.banUser(userInfo).subscribe(succeeded => {
       console.log('ban user success!');
+      if (succeeded) {
+         this.chatService.sendMessage(this.room, this.kickedUser + ' has been banned from the room').subscribe(value => {
+          this.messages = value;
+      });
+    }
+         this.kickedUser = '';
+
     });
-    this.chatService.sendMessage(this.room, this.user +" has been banned from the room").subscribe(value => {
-       this.messages = value;
-    });
-    
   }
 
   onPartRoom() {
