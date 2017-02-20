@@ -16,6 +16,7 @@ export class RoomComponent implements OnInit {
   room: string;
   kickedUser: string;
   privateMessage = false;
+  privateMessages =[];
   user: string;
   constructor(private chatService: ChatService, private router: Router, private route: ActivatedRoute) { }
 
@@ -25,38 +26,32 @@ export class RoomComponent implements OnInit {
     this.chatService.sendMessage(this.room, "Hi, I'm new!").subscribe(value => {
         this.messages = value;
      });
-     console.log("this user issss: " + this.user);
+
+    this.chatService.privateMessage(this.user, "This is where your private messages will apear!").subscribe(value => {
+      this.privateMessages.push(value);
+      console.log("private messages: " + this.privateMessages);
+    })
+  
     this.chatService.getUsers(this.room).subscribe(list => {
       this.users = list;
     });
 
     const userInfo = {user: this.kickedUser, room: this.room};
-    console.log("user info room cp: " + userInfo);
     this.chatService.kickUserOut(userInfo).subscribe(succeeded => {
-      console.log('succeeded: ' + succeeded);
       if (succeeded === this.user) {
           this.router.navigate(['/rooms']);
       }
     });
     
+    this.chatService.privateMsg().subscribe(value => {
+        console.log("value: " + value);
+    });
 
     this.chatService.ban().subscribe(banned => {
       if (banned === this.user){
         this.router.navigate(['/rooms']);
       }
-     // console.log('succeeded(ban): ' + succeeded);
-     // if (succeeded === this.user) {
-       //   this.router.navigate(['/rooms']);
-     // }
     });
-
-   /* this.chatService.banUser(userInfo).subscribe(succeeded => {
-            console.log('succeeded: ' + succeeded);
-
-     // if (succeeded === this.user) {
-       //   this.router.navigate(['/rooms']);
-     // }
-    });*/
   }
 
   submitMessage() {
@@ -67,8 +62,9 @@ export class RoomComponent implements OnInit {
   }
 
   submitPrivateMessage() {
-    this.chatService.privateMessage(this.user, this.privateForm).subscribe(value => {
+    this.chatService.privateMessage(this.privateForm, this.chatForm).subscribe(value => {
       console.log('this is private');
+      this.privateMessages.push(this.privateForm);
 
     });
   }
@@ -91,7 +87,6 @@ export class RoomComponent implements OnInit {
     const userInfo = {user: this.kickedUser, room: this.room};
 
     this.chatService.banUser(userInfo).subscribe(succeeded => {
-      console.log('ban user success!');
       if (succeeded) {
          this.chatService.sendMessage(this.room, this.kickedUser + ' has been banned from the room').subscribe(value => {
           this.messages = value;
@@ -105,8 +100,6 @@ export class RoomComponent implements OnInit {
   onPartRoom() {
 
     this.chatService.partRoom(this.room).subscribe(success => {
-      console.log(this.room);
-      console.log('parting success!');
       this.router.navigate(['/rooms']);
 
     });
