@@ -47,5 +47,7 @@ and the following command in the server folder:
 node chatserver.js
 ```
 
-NOTE: The private message is extrememly classified, so classified not even the sender can see the message, only the reciver.
+NOTE: The private message is extrememly classified, so classified not even the sender can see the message, only the reciever.
+Additionally, when kicking or banning a user, the kick (or ban) is delayed for a few seconds in order for the user in 
+question read the chat notification of his ousting.  
 
