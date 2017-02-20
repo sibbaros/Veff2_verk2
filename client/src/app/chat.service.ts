@@ -106,7 +106,7 @@ export class ChatService {
     return observable;
   }
 
-  privateMsg() : Observable<string> {
+ /* privateMsg() : Observable<string> {
     const observable = new Observable(observer => {
        this.socket.on('recv_privatemsg', (username, message) => {
           const x = { user: username, msg: message};
@@ -120,19 +120,30 @@ export class ChatService {
        });
     });
     return observable;
-  }
+  }*/
 
-  privateMessage(username: string, message: string): Observable<string> {
+  privateMessage(userName: string, message: string): Observable<string> {
      const observable = new Observable(observer => {
        const param = {
-         nick: username,
+         nick: userName,
          message: message
        };
        this.socket.emit('privatemsg', param, succeeded => {
          if (succeeded) {
-            observer.next(succeeded);
+           // observer.next(succeeded);
             console.log('sending the private message!');
          }
+       });
+         this.socket.on('recv_privatemsg', (username, message) => {
+           console.log("seeeeeeeeeeeeeeeeeeee");
+          const x = { user: username, msg: message};
+          if (userName === this.username){
+            console.log("hello, its me");
+            //observer.next(message);
+            console.log("x.message: " + x.msg);
+            console.log("x.user: " + x.user);
+            observer.next(x.msg);
+          }
        });
       });
       return observable;

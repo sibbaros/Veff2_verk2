@@ -43,9 +43,9 @@ export class RoomComponent implements OnInit {
       }
     });
     
-    this.chatService.privateMsg().subscribe(value => {
+  /*  this.chatService.privateMsg().subscribe(value => {
         console.log("value: " + value);
-    });
+    });*/
 
     this.chatService.ban().subscribe(banned => {
       if (banned === this.user){
@@ -62,9 +62,10 @@ export class RoomComponent implements OnInit {
   }
 
   submitPrivateMessage() {
+    console.log("this private form: " + this.privateForm);
     this.chatService.privateMessage(this.privateForm, this.chatForm).subscribe(value => {
       console.log('this is private');
-      this.privateMessages.push(this.privateForm);
+      this.privateMessages.push(value);
 
     });
   }
