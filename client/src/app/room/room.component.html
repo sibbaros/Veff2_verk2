@@ -1,43 +1,45 @@
-<button class='btn btn-danger' (click)="onDisconnect()"> Log out </button>
+<div class="super">
+    <button class='btn btn-danger' (click)="onDisconnect()"> Log out </button>
 
-<div class='col-md-5 chatBox form-control'>
-    <table class="table table-hover">
-        <tr *ngFor="let message of messages">
-            <td>{{ message.nick }}</td>
-            <td>{{ message.message}}</td>
-        </tr>
-    </table>
+    <div class='col-md-5 chatBox form-control'>
+        <table class="table table-hover">
+            <tr *ngFor="let message of messages">
+                <td>{{ message.nick }}</td>
+                <td>{{ message.message}}</td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div class='col-md-3 chatBox form-control'>
+        <table class="table table-hover">
+            <tr *ngFor="let pmessage of privateMessages">
+                <td>{{ pmessage.user }}</td>
+                <td>{{ pmessage.msg }}</td>
+
+            </tr>
+        </table>
+    </div>
+
+
+    <input class="form-control" [(ngModel)]="chatForm" placeholder="Share your thoughts..." />
+    <button class="btn btn-info" (click)="submitMessage()"> Send </button>
+    <button class="btn btn-info" (click)="privateMessage = true"> Private Message </button>
+    <input [hidden]="!privateMessage" class="form-control" [(ngModel)]="privateForm" placeholder="who do you want to message?" size="30" />
+    <button class="btn btn-info" (click)="submitPrivateMessage()"> Send private message </button>
+
+    <input type="text" class="form-control small" [(ngModel)]="kickedUser" placeholder="Who would you like to remove?" />
+
+    <button class="btn btn-leaver btn-info" (click)="onKickUserOut()">Kick user out</button>
+
+    <button class="btn btn-leaver btn-info" (click)="onBanUser()">Ban user</button>
+
+    <button class="btn btn-leaver btn-info" (click)="onPartRoom()"> Leave room </button>
+
+
+    <ul>
+        <li *ngFor="let user of users">
+            {{ user }}
+        </li>
+    </ul>
 </div>
-
-
-<div class='col-md-2 chatBox form-control'>
-    <table class="table table-hover">
-        <tr *ngFor="let pmessage of privateMessages">
-            <td>{{ pmessage.user }}</td>
-            <td>{{ pmessage.msg }}</td>
-
-        </tr>
-    </table>
-</div>
-
-
-<input class="form-control" [(ngModel)]="chatForm" placeholder="Share your thoughts..." />
-<button class="btn btn-info" (click)="submitMessage()"> Send </button>
-<button class="btn btn-info" (click)="privateMessage = true"> Private Message </button>
-<input [hidden]="!privateMessage" class="form-control" [(ngModel)]="privateForm" placeholder="who do you want to message?" size="30" />
-<button class="btn btn-info" (click)="submitPrivateMessage()"> Send private message </button>
-
-<input type="text" class="form-control small" [(ngModel)]="kickedUser" placeholder="Who would you like to remove?" />
-
-<button class="btn btn-leaver btn-info" (click)="onKickUserOut()">Kick user out</button>
-
-<button class="btn btn-leaver btn-info" (click)="onBanUser()">Ban user</button>
-
-<button class="btn btn-leaver btn-info" (click)="onPartRoom()"> Leave room </button>
-
-
-<ul>
-    <li *ngFor="let user of users">
-        {{ user }}
-    </li>
-</ul>
