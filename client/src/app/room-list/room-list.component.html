@@ -1,14 +1,23 @@
+<button class='btn btn-danger' (click)="onDisconnect()"> Log out </button>
+
 <div class="container">
     <h2>Pick a room to join:</h2>
 
     <table class="table table-hover table-striped">
         <tr *ngFor="let room of rooms">
             <td>{{ room }}</td>
-            <td><button class='btn btn-info' (click)="onJoinRoom(room)"> Join room </button></td>
+            <td><button class='btn btn-table btn-info' (click)="onJoinRoom(room)"> Join room </button></td>
         </tr>
     </table>
     <h2>Or create a new room: </h2>
     <input class="form-control" [(ngModel)]="roomName" placeholder="Put room name here" />
 
     <button class="btn btn-info" (click)="onJoinRoom(roomName)"> Add and join room </button>
+</div>
+
+<div class="container">
+    <h3>Current users:</h3>
+    <ul class="list-group">
+        <li *ngFor="let user of users" class="list-group-item"> {{ user }} </li>
+    </ul>
 </div>

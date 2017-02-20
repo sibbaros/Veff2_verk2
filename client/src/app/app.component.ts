@@ -12,11 +12,5 @@ export class AppComponent {
   title = 'Chatter';
   constructor(private chatService: ChatService, private router: Router) { }
 
-   onDisconnect() {
-     console.log('in onDisconnect');
-    this.chatService.disconnect().subscribe(success => {
-      this.router.navigate(['/login']);
-    });
-  }
 }
 

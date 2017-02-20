@@ -11,22 +11,23 @@ export class LoginComponent implements OnInit {
 
   username: string;
   loginFailed = false;
+  empty = false;
+
   constructor(private chatService: ChatService, private router: Router) { }
 
   ngOnInit() {
   }
   onLogin() {
-      console.log('login called in component');
+      if (this.username === undefined) {
+        this.empty = true;
+      } else {
+        this.chatService.login(this.username).subscribe(succeeded => {
+          this.loginFailed = !succeeded;
+          if (succeeded === true) {
+            this.router.navigate(['/rooms']);
+          }
+        });
+      }
 
-      this.chatService.login(this.username).subscribe(succeeded => {
-      this.loginFailed = !succeeded;
-      if (succeeded === true) {
-        this.router.navigate(['/rooms']);
-        console.log('hi');
-      }
-      if (succeeded === false) {
-        console.log('failure');
-      }
-    });
   }
 }

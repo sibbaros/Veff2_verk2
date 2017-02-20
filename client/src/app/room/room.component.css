@@ -1,7 +1,15 @@
 .form-control {
     width: 50%;
-    margin-bottom: 5px;
+    margin: 5px;
     font-size: 14pt;
+}
+
+.btn {
+    font-size: 12pt;
+}
+
+.btn-leaver {
+    background-color: #ff6666;
 }
 
 .small {
